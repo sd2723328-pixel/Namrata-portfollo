@@ -42,9 +42,92 @@ export interface SocialLinks {
 }
 
 export interface ContactMessage {
+  id?: string;
   name: string;
   email: string;
   subject?: string;
   message: string;
   timestamp: string;
 }
+
+export interface PersonalInfo {
+  name: string;
+  title: string;
+  email: string;
+  location: string;
+  availability: string;
+  tagline: string;
+  shortBio: string;
+  fullAbout: string;
+  profilePhoto?: string;
+}
+
+export interface BCALanguageTool {
+  id: string;
+  name: string;
+  category: 'Language' | 'Database' | 'Tool' | 'Web Tech';
+  role: string;
+  whyUseful: string;
+  recommendedSemester: string;
+  iconName?: string;
+}
+
+export interface BCAResource {
+  id: string;
+  title: string;
+  category: 'Languages & Tools' | 'Study Guidance' | 'Documentation' | 'Free Courses' | 'Practice Platforms';
+  description: string;
+  url?: string;
+  tags: string[];
+  recommendedSemester?: string;
+}
+
+export interface BCAProjectIdea {
+  id: string;
+  title: string;
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced / Capstone';
+  semester: string;
+  technologies: string[];
+  description: string;
+  keyFeatures: string[];
+  learningOutcome: string;
+}
+
+export interface BCACareerPath {
+  id: string;
+  role: string;
+  salaryRange?: string;
+  description: string;
+  requiredSkills: string[];
+  futureOptions: string;
+}
+
+export interface BCASectionData {
+  overview: {
+    title: string;
+    description: string;
+    keyHighlights: string[];
+    coreSubjects: string[];
+  };
+  languagesAndTools: BCALanguageTool[];
+  resources: BCAResource[];
+  projectIdeas: BCAProjectIdea[];
+  careerOpportunities: BCACareerPath[];
+}
+
+export interface PortfolioData {
+  personalInfo: PersonalInfo;
+  socialLinks: SocialLinks;
+  skills: Skill[];
+  projects: Project[];
+  education: EducationItem[];
+  bca: BCASectionData;
+  updatedAt?: string;
+}
+
+export interface AuthUser {
+  name: string;
+  email: string;
+  role: 'admin';
+}
+

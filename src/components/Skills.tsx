@@ -10,13 +10,16 @@ import {
   Smartphone,
   Wrench,
   CheckCircle,
-  Sparkles
+  Sparkles,
+  Database
 } from 'lucide-react';
 import { motion } from 'motion/react';
-import { SKILLS_DATA } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 import { Skill } from '../types';
 
 export const Skills: React.FC = () => {
+  const { portfolio } = usePortfolio();
+  const skillsData = portfolio.skills;
   const [selectedFilter, setSelectedFilter] = useState<string>('All');
 
   // Map icon strings to Lucide components
@@ -28,17 +31,18 @@ export const Skills: React.FC = () => {
     Layers,
     Terminal,
     GitBranch,
-    Smartphone
+    Smartphone,
+    Database,
   };
 
   const categories = ['All', 'Frontend', 'Programming Languages', 'Tools & Version Control', 'Core Concepts'];
 
   const filteredSkills = selectedFilter === 'All'
-    ? SKILLS_DATA
-    : SKILLS_DATA.filter((skill) => skill.category === selectedFilter);
+    ? skillsData
+    : skillsData.filter((skill) => skill.category === selectedFilter);
 
   return (
-    <section id="skills" className="py-20 relative">
+    <section id="skills" className="py-20 relative scroll-mt-14">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
@@ -47,7 +51,7 @@ export const Skills: React.FC = () => {
             <span>Technical Capabilities</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Skills & Expertise
+            Skills &amp; Expertise
           </h2>
           <p className="mt-3 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
             Technologies and programming languages I work with to build responsive web applications.
@@ -149,3 +153,4 @@ export const Skills: React.FC = () => {
     </section>
   );
 };
+

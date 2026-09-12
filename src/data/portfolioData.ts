@@ -215,3 +215,261 @@ export const INITIAL_EDUCATION_DATA: EducationItem[] = [
     ]
   }
 ];
+
+export const INITIAL_BCA_DATA = {
+  overview: {
+    title: 'Bachelor of Computer Applications (BCA)',
+    description: 'The Bachelor of Computer Applications is a 3-year undergraduate degree designed to develop comprehensive technical competencies in computer programming, software engineering, web technologies, database architecture, and networking. It bridges theoretical computational principles with direct, hands-on software development skills desired by modern IT employers.',
+    keyHighlights: [
+      '3-Year full-time program across 6 balanced semesters',
+      'Comprehensive balance of programming, mathematics, and software design',
+      'Strong industry relevance with direct placement prospects in IT/Software companies',
+      'Direct stepping stone to Master of Computer Applications (MCA) and global tech certifications'
+    ],
+    coreSubjects: [
+      'C & C++ Programming',
+      'Data Structures & Algorithms',
+      'Database Management Systems (DBMS)',
+      'Web Technologies (HTML, CSS, JS)',
+      'Operating Systems & Linux',
+      'Computer Networks & Security',
+      'Software Engineering & Testing',
+      'Java & Python Development'
+    ]
+  },
+  languagesAndTools: [
+    {
+      id: 'bca-lang-1',
+      name: 'C Language',
+      category: 'Language' as const,
+      role: 'Procedural Programming Foundation',
+      whyUseful: 'Crucial for mastering memory allocation, pointers, compiler mechanisms, and low-level algorithmic logic in Semester 1 & 2.',
+      recommendedSemester: 'Semester 1 - 2',
+      iconName: 'Cpu'
+    },
+    {
+      id: 'bca-lang-2',
+      name: 'C++',
+      category: 'Language' as const,
+      role: 'Object-Oriented Programming (OOP)',
+      whyUseful: 'Introduces core OOP principles (inheritance, polymorphism, encapsulation) and the Standard Template Library (STL) for fast problem solving.',
+      recommendedSemester: 'Semester 2 - 3',
+      iconName: 'Layers'
+    },
+    {
+      id: 'bca-lang-3',
+      name: 'Java',
+      category: 'Language' as const,
+      role: 'Enterprise & Platform Independence',
+      whyUseful: 'Powers desktop, Android, and enterprise backend systems with robust exception handling, multithreading, and JDBC database connectivity.',
+      recommendedSemester: 'Semester 3 - 4',
+      iconName: 'Coffee'
+    },
+    {
+      id: 'bca-lang-4',
+      name: 'Python',
+      category: 'Language' as const,
+      role: 'Rapid Development & Scripting',
+      whyUseful: 'Versatile for automation, web APIs (Flask/FastAPI), data analysis, and getting started with machine learning.',
+      recommendedSemester: 'Semester 4 - 5',
+      iconName: 'Terminal'
+    },
+    {
+      id: 'bca-lang-5',
+      name: 'HTML, CSS & JavaScript',
+      category: 'Web Tech' as const,
+      role: 'Modern Web Engineering',
+      whyUseful: 'The universal language of the Internet. Enables building responsive client-side apps, dynamic single-page applications, and interactive user experiences.',
+      recommendedSemester: 'Semester 2 - 4',
+      iconName: 'Globe'
+    },
+    {
+      id: 'bca-lang-6',
+      name: 'SQL / MySQL / PostgreSQL',
+      category: 'Database' as const,
+      role: 'Relational Database Management (RDBMS)',
+      whyUseful: 'Essential for designing schemas, writing normalized relational queries, ACID transactions, and connecting backends with persistent data.',
+      recommendedSemester: 'Semester 3 - 4',
+      iconName: 'Database'
+    },
+    {
+      id: 'bca-lang-7',
+      name: 'Git & GitHub',
+      category: 'Tool' as const,
+      role: 'Version Control & Team Collaboration',
+      whyUseful: 'Industry standard for code versioning, branch management, code reviews, and maintaining a verifiable public portfolio for recruiters.',
+      recommendedSemester: 'Semester 1 - 6 (All)',
+      iconName: 'GitBranch'
+    },
+    {
+      id: 'bca-lang-8',
+      name: 'Linux / Terminal',
+      category: 'Tool' as const,
+      role: 'Operating System & Shell Essentials',
+      whyUseful: 'Fundamental for web servers, Docker containers, cloud hosting, and shell scripting in modern DevOps workflows.',
+      recommendedSemester: 'Semester 2 - 4',
+      iconName: 'TerminalSquare'
+    }
+  ],
+  resources: [
+    {
+      id: 'bca-res-1',
+      title: 'freeCodeCamp - Web Development & JavaScript',
+      category: 'Free Courses' as const,
+      description: 'Comprehensive, project-based interactive curriculum covering Responsive Web Design, JavaScript Algorithms, and Full Stack development.',
+      url: 'https://www.freecodecamp.org',
+      tags: ['Free', 'Interactive', 'Certificates', 'Beginner Friendly'],
+      recommendedSemester: 'Semester 2 - 4'
+    },
+    {
+      id: 'bca-res-2',
+      title: 'MDN Web Docs (Mozilla Developer Network)',
+      category: 'Documentation' as const,
+      description: 'The gold standard reference for HTML5, CSS3, and JavaScript APIs with live interactive examples and best practice guidelines.',
+      url: 'https://developer.mozilla.org',
+      tags: ['Reference', 'HTML/CSS/JS', 'Standards'],
+      recommendedSemester: 'All Semesters'
+    },
+    {
+      id: 'bca-res-3',
+      title: 'GeeksforGeeks - Data Structures & Algorithms',
+      category: 'Study Guidance' as const,
+      description: 'Detailed topic-wise tutorials, visual diagrams, and code snippets in C, C++, and Java mapped directly to university BCA syllabus topics.',
+      url: 'https://www.geeksforgeeks.org',
+      tags: ['Syllabus Topics', 'C/C++', 'DSA', 'Exam Prep'],
+      recommendedSemester: 'Semester 2 - 5'
+    },
+    {
+      id: 'bca-res-4',
+      title: 'CS50: Introduction to Computer Science (Harvard)',
+      category: 'Free Courses' as const,
+      description: 'A world-class foundational course covering C, Python, SQL, algorithms, and computational thinking taught by David J. Malan.',
+      url: 'https://cs50.harvard.edu',
+      tags: ['Harvard', 'Free Video Lectures', 'Logic Building'],
+      recommendedSemester: 'Semester 1 - 2'
+    },
+    {
+      id: 'bca-res-5',
+      title: 'roadmap.sh - Developer Roadmaps',
+      category: 'Study Guidance' as const,
+      description: 'Step-by-step visual pathways for Frontend, Backend, DevOps, and Computer Science fundamentals.',
+      url: 'https://roadmap.sh',
+      tags: ['Career Roadmaps', 'Visual Guide', 'Up-to-Date'],
+      recommendedSemester: 'All Semesters'
+    },
+    {
+      id: 'bca-res-6',
+      title: 'HackerRank & LeetCode (Beginner Tracks)',
+      category: 'Practice Platforms' as const,
+      description: 'Practice programming problem sets in C, C++, and Python to prepare for coding rounds and campus placement tests.',
+      url: 'https://www.hackerrank.com',
+      tags: ['Coding Practice', 'Problem Solving', 'Placement Prep'],
+      recommendedSemester: 'Semester 3 - 6'
+    }
+  ],
+  projectIdeas: [
+    {
+      id: 'bca-proj-1',
+      title: 'Student Record Management System',
+      difficulty: 'Beginner' as const,
+      semester: 'Semester 1 - 2',
+      technologies: ['C / C++', 'File Handling (fstream)', 'Data Structures'],
+      description: 'A structured command-line application that allows administrators to add students, search by roll number, update marks, and calculate GPAs with persistent file storage.',
+      keyFeatures: [
+        'Add, edit, search, and delete student academic records',
+        'Text file / binary file persistence using file streams',
+        'Automatic grade computation and tabular report generation'
+      ],
+      learningOutcome: 'Deep understanding of pointers, structs/classes, file I/O, and structured menu navigation.'
+    },
+    {
+      id: 'bca-proj-2',
+      title: 'Interactive Personal Portfolio & Resume Website',
+      difficulty: 'Beginner' as const,
+      semester: 'Semester 2 - 3',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
+      description: 'A modern, mobile-friendly personal portfolio showcasing projects, academic credentials, skills, and interactive contact forms.',
+      keyFeatures: [
+        'Responsive layout adjusting to phones, tablets, and desktops',
+        'Dark and light mode theme toggle with local persistence',
+        'Interactive project demo modals and contact submission validation'
+      ],
+      learningOutcome: 'Hands-on mastery of semantic HTML, Flexbox, CSS Grid, media queries, and DOM event handling.'
+    },
+    {
+      id: 'bca-proj-3',
+      title: 'College Library Management Portal',
+      difficulty: 'Intermediate' as const,
+      semester: 'Semester 3 - 4',
+      technologies: ['HTML/CSS/JS', 'Node.js / Express or PHP', 'MySQL Database'],
+      description: 'A web portal for cataloging books, tracking issue/return dates, calculating late fines, and generating member borrowing history.',
+      keyFeatures: [
+        'Relational database schema with normalized tables (Books, Members, Loans)',
+        'Automated fine calculation based on due date difference',
+        'Search books by ISBN, author name, or subject tag'
+      ],
+      learningOutcome: 'Understanding client-server communication, SQL queries (JOINs, GROUP BY), and session authentication.'
+    },
+    {
+      id: 'bca-proj-4',
+      title: 'Campus Placement & Recruitment Portal',
+      difficulty: 'Advanced / Capstone' as const,
+      semester: 'Semester 5 - 6',
+      technologies: ['React', 'Express / Node.js', 'PostgreSQL or MongoDB', 'JWT Auth'],
+      description: 'A full-fledged final year capstone project bridging campus students, training & placement officers (TPO), and recruiting companies.',
+      keyFeatures: [
+        'Role-Based Access Control: Student, Placement Officer, and Company Recruiter',
+        'Job vacancy postings with minimum CGPA and skill eligibility filters',
+        'Resume upload and one-click job application with status tracking'
+      ],
+      learningOutcome: 'Full-stack software architecture, RESTful API design, database indexing, and user authentication workflows.'
+    }
+  ],
+  careerOpportunities: [
+    {
+      id: 'bca-career-1',
+      role: 'Frontend / Web Developer',
+      salaryRange: '₹3.5 LPA - ₹7 LPA (Entry Level)',
+      description: 'Designs and builds responsive, interactive client interfaces for websites and SaaS platforms using HTML, CSS, JavaScript, and modern frameworks.',
+      requiredSkills: ['HTML5/CSS3', 'JavaScript (ES6+)', 'Responsive Design', 'React / Vue', 'Git & GitHub'],
+      futureOptions: 'Lead Frontend Engineer, UI/UX Architect, Full Stack Developer'
+    },
+    {
+      id: 'bca-career-2',
+      role: 'Software Engineer / Application Developer',
+      salaryRange: '₹4 LPA - ₹8 LPA (Entry Level)',
+      description: 'Develops robust software applications, implements business logic, writes algorithms, and maintains enterprise codebases.',
+      requiredSkills: ['C++ / Java / Python', 'Data Structures & Algorithms', 'OOP Principles', 'Database Design', 'Debugging'],
+      futureOptions: 'Senior Software Engineer, Tech Lead, Systems Architect'
+    },
+    {
+      id: 'bca-career-3',
+      role: 'Database Administrator (DBA) / SQL Developer',
+      salaryRange: '₹3.5 LPA - ₹6.5 LPA (Entry Level)',
+      description: 'Manages relational databases, writes complex analytical queries, ensures database integrity, backups, and security.',
+      requiredSkills: ['SQL (MySQL / PostgreSQL / Oracle)', 'Normalization', 'Indexing & Performance Tuning', 'Data Modeling'],
+      futureOptions: 'Data Engineer, Cloud Database Specialist, BI Analyst'
+    },
+    {
+      id: 'bca-career-4',
+      role: 'Higher Studies (MCA / M.Sc Computer Science)',
+      salaryRange: 'Post-MCA: ₹7 LPA - ₹16+ LPA',
+      description: 'Pursuing Master of Computer Applications (MCA) via prestigious national entrance exams like NIMCET or state entrances opens top-tier tech placements at MNCs and product companies.',
+      requiredSkills: ['Mathematics Fundamentals', 'Analytical Reasoning', 'Computer Science Core', 'C / C++ / Java'],
+      futureOptions: 'Tier-1 Product Companies, Software Architect, Research & AI Roles'
+    }
+  ]
+};
+
+export const DEFAULT_PORTFOLIO_DATA = {
+  personalInfo: {
+    ...PERSONAL_INFO,
+    profilePhoto: ''
+  },
+  socialLinks: INITIAL_SOCIAL_LINKS,
+  skills: SKILLS_DATA,
+  projects: PROJECTS_DATA,
+  education: INITIAL_EDUCATION_DATA,
+  bca: INITIAL_BCA_DATA
+};
+

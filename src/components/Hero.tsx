@@ -1,7 +1,7 @@
 import React from 'react';
-import { ArrowRight, Send, Download, Sparkles, Terminal, Code2, CheckCircle2, Copy, Check } from 'lucide-react';
+import { ArrowRight, Send, Sparkles, Code2, CheckCircle2, Copy, Check, GraduationCap } from 'lucide-react';
 import { motion } from 'motion/react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 interface HeroProps {
   onViewWork: () => void;
@@ -9,11 +9,13 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ onViewWork, onContactMe }) => {
+  const { portfolio } = usePortfolio();
+  const { personalInfo } = portfolio;
   const [copied, setCopied] = React.useState(false);
 
   const codeSnippet = `const developer = {
-  name: "${PERSONAL_INFO.name}",
-  role: "${PERSONAL_INFO.title}",
+  name: "${personalInfo.name}",
+  role: "${personalInfo.title}",
   coreStack: ["HTML5", "CSS3", "JavaScript", "C++", "Python"],
   passion: "Building responsive, modern web experiences",
   openToWork: true
@@ -25,10 +27,17 @@ export const Hero: React.FC<HeroProps> = ({ onViewWork, onContactMe }) => {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const scrollToBca = () => {
+    const el = document.getElementById('bca-students');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section
       id="hero"
-      className="relative min-h-[90vh] flex items-center justify-center pt-28 pb-16 overflow-hidden"
+      className="relative min-h-[88vh] flex items-center justify-center pt-24 pb-16 overflow-hidden"
     >
       {/* Subtle Background Ambience Gradients */}
       <div className="absolute top-1/4 -left-32 w-80 h-80 bg-teal-400/10 dark:bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -43,32 +52,52 @@ export const Hero: React.FC<HeroProps> = ({ onViewWork, onContactMe }) => {
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="lg:col-span-7 flex flex-col items-start text-left"
           >
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800/60 text-teal-700 dark:text-teal-300 text-xs font-medium mb-6 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Available for internships & web projects</span>
+            {/* Status Badge & BCA Quick Nav */}
+            <div className="flex flex-wrap items-center gap-2 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800/60 text-teal-700 dark:text-teal-300 text-xs font-medium shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>{personalInfo.availability || 'Available for internships & projects'}</span>
+              </div>
+
+              <button
+                type="button"
+                onClick={scrollToBca}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-medium border border-slate-200 dark:border-slate-700 transition-colors"
+              >
+                <GraduationCap className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+                <span>BCA Hub</span>
+              </button>
             </div>
+
+            {/* Profile Avatar / Monogram on mobile or tablet if photo uploaded */}
+            {personalInfo.profilePhoto && (
+              <div className="mb-4 sm:hidden">
+                <img
+                  src={personalInfo.profilePhoto}
+                  alt={personalInfo.name}
+                  className="w-16 h-16 rounded-2xl object-cover border-2 border-teal-500 shadow-md"
+                />
+              </div>
+            )}
 
             {/* Main Greeting */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15] mb-3">
               Hi, I’m{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 via-teal-500 to-cyan-500 dark:from-teal-400 dark:via-teal-300 dark:to-cyan-300">
-                Namrata Ghosh
+                {personalInfo.name}
               </span>
             </h1>
 
             {/* Subtitle */}
             <div className="flex items-center gap-2 mb-4">
               <h2 className="text-xl sm:text-2xl font-semibold text-slate-700 dark:text-slate-300">
-                Aspiring Web Developer
+                {personalInfo.title}
               </h2>
             </div>
 
             {/* Short Introduction */}
             <p className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-xl mb-8 leading-relaxed">
-              Passionate about building responsive, user-friendly digital experiences with clean code.
-              Focused on crafting modern web applications using HTML, CSS, JavaScript, and foundational
-              programming in C, C++, and Python.
+              {personalInfo.shortBio}
             </p>
 
             {/* Buttons: View My Work and Contact Me */}
@@ -154,24 +183,24 @@ export const Hero: React.FC<HeroProps> = ({ onViewWork, onContactMe }) => {
                   </p>
                   <p className="pl-4">
                     <span className="text-slate-400">name:</span>{' '}
-                    <span className="text-emerald-300">"Namrata Ghosh"</span>,
+                    <span className="text-emerald-300">&quot;{personalInfo.name}&quot;</span>,
                   </p>
                   <p className="pl-4">
                     <span className="text-slate-400">role:</span>{' '}
-                    <span className="text-emerald-300">"Aspiring Web Developer"</span>,
+                    <span className="text-emerald-300">&quot;{personalInfo.title}&quot;</span>,
                   </p>
                   <p className="pl-4">
                     <span className="text-slate-400">learningJourney:</span> [
                   </p>
-                  <p className="pl-8 text-amber-300">"HTML5", "CSS3", "JavaScript", "C++", "Python"</p>
+                  <p className="pl-8 text-amber-300">&quot;HTML5&quot;, &quot;CSS3&quot;, &quot;JavaScript&quot;, &quot;C++&quot;, &quot;Python&quot;</p>
                   <p className="pl-4">],</p>
                   <p className="pl-4">
                     <span className="text-slate-400">passion:</span>{' '}
-                    <span className="text-teal-300">"Modern Web & Clean Architecture"</span>,
+                    <span className="text-teal-300">&quot;Modern Web &amp; Clean Architecture&quot;</span>,
                   </p>
                   <p className="pl-4">
                     <span className="text-slate-400">status:</span>{' '}
-                    <span className="text-sky-300">"Ready to build & collaborate"</span>
+                    <span className="text-sky-300">&quot;Ready to build &amp; collaborate&quot;</span>
                   </p>
                   <p>&#125;;</p>
                 </div>
@@ -192,3 +221,4 @@ export const Hero: React.FC<HeroProps> = ({ onViewWork, onContactMe }) => {
     </section>
   );
 };
+

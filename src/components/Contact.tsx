@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Mail, Send, Copy, Check, MessageSquare, MapPin, Clock, CheckCircle2, AlertCircle } from 'lucide-react';
 import { motion } from 'motion/react';
-import { PERSONAL_INFO } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 export const Contact: React.FC = () => {
+  const { portfolio, submitContactMessage } = usePortfolio();
+  const { personalInfo } = portfolio;
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,12 +19,12 @@ export const Contact: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   const handleCopyEmail = () => {
-    navigator.clipboard.writeText(PERSONAL_INFO.email);
+    navigator.clipboard.writeText(personalInfo.email);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErrorMessage('');
 
@@ -38,17 +41,31 @@ export const Contact: React.FC = () => {
 
     setIsSubmitting(true);
 
-    // Simulate sending message with brief delay and save to local state
-    setTimeout(() => {
+    try {
+      const result = await submitContactMessage({
+        name: formData.name,
+        email: formData.email,
+        subject: `Portfolio Inquiry from ${formData.name}`,
+        message: formData.message,
+      });
+
       setIsSubmitting(false);
-      setIsSuccess(true);
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setIsSuccess(false), 5000);
-    }, 700);
+
+      if (result.success) {
+        setIsSuccess(true);
+        setFormData({ name: '', email: '', message: '' });
+        setTimeout(() => setIsSuccess(false), 5000);
+      } else {
+        setErrorMessage(result.message || 'Failed to submit message. Please try again or email directly.');
+      }
+    } catch {
+      setIsSubmitting(false);
+      setErrorMessage('Network error while sending message. Please try again.');
+    }
   };
 
   return (
-    <section id="contact" className="py-20 relative">
+    <section id="contact" className="py-20 relative scroll-mt-14">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
@@ -96,11 +113,11 @@ export const Contact: React.FC = () => {
                       Email Address
                     </span>
                     <a
-                      href={`mailto:${PERSONAL_INFO.email}`}
+                      href={`mailto:${personalInfo.email}`}
                       className="text-sm font-bold text-slate-900 dark:text-white hover:text-teal-600 dark:hover:text-teal-400 transition-colors"
                       id="contact-email-link"
                     >
-                      {PERSONAL_INFO.email}
+                      {personalInfo.email}
                     </a>
                   </div>
                 </div>
@@ -136,7 +153,7 @@ export const Contact: React.FC = () => {
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Location</span>
                 </div>
                 <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">
-                  {PERSONAL_INFO.location}
+                  {personalInfo.location || 'India'}
                 </p>
               </div>
 

@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { ExternalLink, Github, FolderGit2, Play, Code2, Sparkles, CheckCircle } from 'lucide-react';
 import { motion } from 'motion/react';
-import { PROJECTS_DATA } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 import { Project } from '../types';
 import { ProjectDemoModal } from './ProjectDemoModal';
 
 export const Projects: React.FC = () => {
+  const { portfolio } = usePortfolio();
+  const projectsData = portfolio.projects;
   const [activeDemoProject, setActiveDemoProject] = useState<Project | null>(null);
 
   // Visual gradients / theme accents for project card banners
@@ -33,7 +35,7 @@ export const Projects: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="py-20 bg-slate-50/70 dark:bg-slate-900/30 relative">
+    <section id="projects" className="py-20 bg-slate-50/70 dark:bg-slate-900/30 relative scroll-mt-14">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14">
@@ -52,7 +54,7 @@ export const Projects: React.FC = () => {
 
         {/* Project Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROJECTS_DATA.map((project, idx) => {
+          {projectsData.map((project, idx) => {
             const theme = projectThemeAccents[project.id] || {
               gradient: 'from-teal-500/20 to-cyan-500/20',
               iconBg: 'bg-teal-500/10 text-teal-600'

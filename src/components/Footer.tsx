@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Instagram, Mail, Edit3, ArrowUp, Heart, Code2 } from 'lucide-react';
-import { INITIAL_SOCIAL_LINKS } from '../data/portfolioData';
+import React, { useState } from 'react';
+import { Github, Linkedin, Instagram, Mail, Edit3, ArrowUp } from 'lucide-react';
+import { usePortfolio } from '../context/PortfolioContext';
 import { SocialLinks } from '../types';
 import { EditLinksModal } from './EditLinksModal';
 
@@ -9,31 +9,21 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({ onScrollToTop }) => {
-  const [socialLinks, setSocialLinks] = useState<SocialLinks>(() => {
-    try {
-      const saved = localStorage.getItem('namrata_portfolio_social_links');
-      if (saved) return JSON.parse(saved);
-    } catch (e) {
-      console.error(e);
-    }
-    return INITIAL_SOCIAL_LINKS;
-  });
+  const { portfolio, updateSocialLinks, isAuthenticated } = usePortfolio();
+  const socialLinks = portfolio.socialLinks;
+  const personalInfo = portfolio.personalInfo;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleSaveLinks = (newLinks: SocialLinks) => {
-    setSocialLinks(newLinks);
-    try {
-      localStorage.setItem('namrata_portfolio_social_links', JSON.stringify(newLinks));
-    } catch (e) {
-      console.error(e);
-    }
+  const handleSaveLinks = async (newLinks: SocialLinks) => {
+    await updateSocialLinks(newLinks);
   };
 
   const navLinks = [
     { label: 'About', href: '#about' },
     { label: 'Skills', href: '#skills' },
     { label: 'Projects', href: '#projects' },
+    { label: 'BCA Hub', href: '#bca-students' },
     { label: 'Education', href: '#education' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -49,11 +39,11 @@ export const Footer: React.FC<FooterProps> = ({ onScrollToTop }) => {
                 &lt;NG/&gt;
               </span>
               <span className="font-bold text-slate-900 dark:text-white text-base">
-                Namrata Ghosh
+                {personalInfo.name}
               </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 max-w-sm">
-              Aspiring Web Developer dedicated to writing clean code and crafting responsive user experiences.
+              {personalInfo.title} dedicated to writing clean code and crafting responsive user experiences.
             </p>
           </div>
 
@@ -114,22 +104,24 @@ export const Footer: React.FC<FooterProps> = ({ onScrollToTop }) => {
               <Mail className="w-4 h-4" />
             </a>
 
-            <button
-              type="button"
-              onClick={() => setIsModalOpen(true)}
-              className="p-2.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 hover:bg-teal-100 dark:hover:bg-teal-900/60 transition-colors border border-teal-200/60 dark:border-teal-800/60"
-              title="Edit Social Media Links"
-              aria-label="Edit social links"
-            >
-              <Edit3 className="w-4 h-4" />
-            </button>
+            {isAuthenticated && (
+              <button
+                type="button"
+                onClick={() => setIsModalOpen(true)}
+                className="p-2.5 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 hover:bg-teal-100 dark:hover:bg-teal-900/60 transition-colors border border-teal-200/60 dark:border-teal-800/60"
+                title="Edit Social Media Links"
+                aria-label="Edit social links"
+              >
+                <Edit3 className="w-4 h-4" />
+              </button>
+            )}
           </div>
         </div>
 
         {/* Bottom Bar with exact required copyright */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
           <p id="footer-copyright" className="text-center sm:text-left font-medium">
-            © 2026 Namrata Ghosh. All Rights Reserved.
+            © 2026 {personalInfo.name}. All Rights Reserved.
           </p>
 
           <button
@@ -152,3 +144,4 @@ export const Footer: React.FC<FooterProps> = ({ onScrollToTop }) => {
     </footer>
   );
 };
+
